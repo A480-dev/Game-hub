@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="theme-color" content="#00f5d4">
+    <meta name="description" content="20 mini-games in one mobile app">
+    <meta name="apple-mobile-web-app-title" content="GameHub">
+    <link rel="manifest" href="manifest.json">
+    <link rel="apple-touch-icon" href="icon-192.png">
+    <title>Game Hub</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div id="app">
+        <header class="hub-header">
+            <div class="logo-section">
+                <div class="logo-icon">
+                    <svg viewBox="0 0 40 40" fill="none">
+                        <polygon points="20,2 38,11 38,29 20,38 2,29 2,11" stroke="currentColor" stroke-width="2" fill="none"/>
+                        <circle cx="20" cy="20" r="8" fill="currentColor"/>
+                    </svg>
+                </div>
+                <h1>GAME HUB</h1>
+            </div>
+            <div class="header-stats">
+                <div class="stat-item">
+                    <span class="stat-label">JUEGOS</span>
+                    <span class="stat-value" id="total-games">20</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">PUNTUACIÓN</span>
+                    <span class="stat-value" id="total-score">0</span>
+                </div>
+            </div>
+        </header>
+
+        <main class="games-container">
+            <div class="games-grid" id="games-grid">
+                <!-- Games will be injected here -->
+            </div>
+        </main>
+
+        <nav class="bottom-nav">
+            <button class="nav-btn active" data-view="all">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="3" y="3" width="7" height="7"/>
+                    <rect x="14" y="3" width="7" height="7"/>
+                    <rect x="3" y="14" width="7" height="7"/>
+                    <rect x="14" y="14" width="7" height="7"/>
+                </svg>
+                <span>Todos</span>
+            </button>
+            <button class="nav-btn" data-view="favorites">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                </svg>
+                <span>Favoritos</span>
+            </button>
+            <button class="nav-btn" data-view="scores">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M18 20V10M12 20V4M6 20v-6"/>
+                </svg>
+                <span>Ranking</span>
+            </button>
+        </nav>
+    </div>
+
+    <div id="game-overlay" class="game-overlay hidden">
+        <div class="game-container">
+            <header class="game-header">
+                <button class="back-btn" id="back-btn">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M19 12H5M12 19l-7-7 7-7"/>
+                    </svg>
+                </button>
+                <h2 id="game-title">Juego</h2>
+                <div class="game-score">
+                    <span>Puntos: </span>
+                    <span id="current-score">0</span>
+                </div>
+            </header>
+            <div class="canvas-wrapper">
+                <canvas id="game-canvas"></canvas>
+            </div>
+            <div class="game-controls">
+                <button class="control-btn" id="restart-btn">Reiniciar</button>
+                <button class="control-btn" id="home-btn">Menú</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="score-modal" class="modal hidden">
+        <div class="modal-content">
+            <h2>¡Nueva Puntuación!</h2>
+            <div class="score-display">
+                <span id="final-score">0</span>
+            </div>
+            <div class="high-score-msg" id="high-score-msg">
+                ¡Nuevo Récord!
+            </div>
+            <div class="modal-buttons">
+                <button class="modal-btn" id="play-again-btn">Jugar de nuevo</button>
+                <button class="modal-btn secondary" id="modal-home-btn">Menú</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="main.js"></script>
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/service-worker.js')
+                    .then(reg => console.log('SW registered'))
+                    .catch(err => console.log('SW error:', err));
+            });
+        }
+    </script>
+</body>
+</html>

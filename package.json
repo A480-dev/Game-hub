@@ -1,0 +1,36 @@
+{
+  "name": "game-hub",
+  "version": "1.0.0",
+  "description": "20 mini-games mobile app - PWA",
+  "main": "index.html",
+  "scripts": {
+    "start": "python3 -m http.server 8000",
+    "dev": "python3 -m http.server 8000",
+    "build": "echo 'No build step required for PWA'"
+  },
+  "keywords": [
+    "game",
+    "pwa",
+    "mobile",
+    "html5",
+    "canvas"
+  ],
+  "author": "Game Hub Team",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "devDependencies": {},
+  "dependencies": {},
+  "cordova": {
+    "plugins": {},
+    "platforms": ["android", "ios"]
+  },
+  "capacitor": {
+    "appId": "com.gamehub.app",
+    "appName": "GameHub",
+    "webDir": ".",
+    "bundledWebRuntime": false
+  }
+}
