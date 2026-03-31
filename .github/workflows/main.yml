@@ -16,10 +16,17 @@ jobs:
           distribution: 'temurin'
       - name: Install dependencies
         run: npm install
+      - name: Create www folder and copy files
+        run: |
+          mkdir -p www
+          cp index.html style.css main.js game_core.js www/
+          cp -r games www/
+          cp -r assets www/ 2>/dev/null || echo "No assets folder found"
+          cp manifest.json service-worker.js www/ 2>/dev/null || echo "No PWA files found"
       - name: Build Project
         run: |
           npm install @capacitor/core @capacitor/cli @capacitor/android
-          npx cap init "Game Hub" "com.a480.gamehub" --web-dir .
+          npx cap init "Game Hub" "com.a480.gamehub" --web-dir www
           npx cap add android
           npx cap copy
       - name: Build APK
